@@ -1,5 +1,6 @@
 using Command.Input;
 using Command.Main;
+using System;
 using UnityEngine;
 
 namespace Command.UI
@@ -43,6 +44,11 @@ namespace Command.UI
                         gameplayView.ShowPlayerOverlay(2, OverlayColorType.Friendly);
                     break;
             }
+        }
+
+        public void OnUndoButtonClicked()
+        {
+            GameService.Instance.CommandInvoker.Undo();
         }
 
         public void ResetBattleBackgroundOverlay() => gameplayView.ResetBackgroundOverlay();

@@ -17,5 +17,14 @@ namespace Command.Commands
         public override void Execute() => GameService.Instance.ActionService.GetActionByType(CommandType.BerserkAttack).PerformAction(actorUnit, targetUnit, willHitTarget);
 
         public override bool WillHitTarget() => Random.Range(0f, 1f) < hitChance;
+
+        public override void Undo()
+        {
+            if (willHitTarget)
+            {
+                targetUnit.RestoreHealth(actorUnit.CurrentPower);
+                actorUnit.Owner.ResetCurrentActiveUnit();
+            }
+        }
     }
 }
