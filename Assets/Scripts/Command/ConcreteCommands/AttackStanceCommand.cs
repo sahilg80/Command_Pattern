@@ -20,7 +20,7 @@ namespace Command.Commands
         {
             if (willHitTarget)
             {
-                targetUnit.RestoreHealth(actorUnit.CurrentPower);
+                targetUnit.CurrentPower -= (int)(targetUnit.CurrentPower * 0.2f);
                 actorUnit.Owner.ResetCurrentActiveUnit();
             }
         }
