@@ -9,7 +9,7 @@ using Command.Events;
 using Command.Battle;
 using Command.Actions;
 using UnityEngine.UI;
-using Command.Commands;
+using Assets.Scripts.Command;
 
 namespace Command.Main
 {
@@ -55,5 +55,6 @@ namespace Command.Main
         }
 
         private void Update() => InputService.UpdateInputService();
+
     }
 }

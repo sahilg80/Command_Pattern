@@ -1,4 +1,5 @@
-﻿using Command.Actions;
+﻿using Assets.Scripts.Command.AbstractCommands;
+using Command.Actions;
 using Command.Main;
 using System;
 using System.Collections.Generic;
@@ -6,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Commands
+namespace Assets.Scripts.Command
 {
-    public class BerserkAttackCommand : UnitCommand
+    public class AttackStanceCommand : UnitCommand
     {
         private bool willHitTarget;
 
-        public BerserkAttackCommand(CommandData commandData)
+        public AttackStanceCommand(CommandData commandData)
         {
             this.CommandData = commandData;
             willHitTarget = WillHitTarget();

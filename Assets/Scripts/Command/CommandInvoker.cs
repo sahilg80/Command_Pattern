@@ -1,7 +1,8 @@
+using Command.AbstractCommands;
 using Command.Main;
 using System.Collections.Generic;
 
-namespace Command.Commands
+namespace Assets.Scripts.Command
 {
     public class CommandInvoker
     {

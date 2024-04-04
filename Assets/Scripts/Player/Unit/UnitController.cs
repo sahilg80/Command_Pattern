@@ -4,6 +4,7 @@ using Command.Actions;
 using System.Collections;
 using System;
 using Object = UnityEngine.Object;
+using Assets.Scripts.Command.AbstractCommands;
 
 namespace Command.Player
 {
@@ -58,6 +59,7 @@ namespace Command.Player
             GameService.Instance.UIService.SetActionContainerAlignment(Owner.PlayerID);
         }
 
+        public void ProcessUnitCommand(UnitCommand commandToProcess) => GameService.Instance.CommandInvoker.ProcessCommand(commandToProcess);
         private void SetAliveState(UnitAliveState stateToSet) => aliveState = stateToSet;
 
         public void SetUsedState(UnitUsedState stateToSet) => UsedState = stateToSet;

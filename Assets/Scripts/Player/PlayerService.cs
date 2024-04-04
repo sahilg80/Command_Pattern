@@ -1,3 +1,4 @@
+using Assets.Scripts.Command.AbstractCommands;
 using Command.Actions;
 using Command.Main;
 
@@ -65,7 +66,7 @@ namespace Command.Player
 
         public void OnPlayerTurnCompleted() => StartNextTurn();
 
-        public void PerformAction(CommandType actionSelected, UnitController targetUnit, bool isSuccessful) => GameService.Instance.ActionService.GetActionByType(actionSelected).PerformAction(activePlayer.GetUnitByID(ActiveUnitID), targetUnit, isSuccessful);
+        public void PerformAction(CommandType actionSelected, UnitController targetUnit) => GameService.Instance.ActionService.GetActionByType(actionSelected).PerformAction(activePlayer.GetUnitByID(ActiveUnitID), targetUnit, true);
 
         public void PlayerDied(PlayerController deadPlayer)
         {
@@ -96,5 +97,27 @@ namespace Command.Player
             else if (player2.AllUnitsDead())
                 PlayerDied(player2);
         }
+
+
+        public void ProcessUnitCommand(UnitCommand commandToProcess)
+        {
+            // Set unit references for the command.
+            SetUnitReferences(commandToProcess);
+
+            // Delegate unit command processing to the corresponding player.
+            GetPlayerById(commandToProcess.CommandData.ActorPlayerID).ProcessUnitCommand(commandToProcess);
+        }
+
+        private void SetUnitReferences(UnitCommand commandToProcess)
+        {
+            // Get actor and target units based on the command data.
+            var actorUnit = GetPlayerById(commandToProcess.CommandData.ActorPlayerID).GetUnitByID(commandToProcess.CommandData.ActorUnitID);
+            var targetUnit = GetPlayerById(commandToProcess.CommandData.TargetPlayerID).GetUnitByID(commandToProcess.CommandData.TargetUnitID);
+
+            // Set the actor and target units for the command.
+            commandToProcess.SetActorUnit(actorUnit);
+            commandToProcess.SetTargetUnit(targetUnit);
+        }
+
     }
 }
